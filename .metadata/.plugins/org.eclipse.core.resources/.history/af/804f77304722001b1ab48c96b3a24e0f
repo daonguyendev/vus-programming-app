@@ -1,0 +1,12 @@
+package com.vus;
+
+/**
+ * Send email to your friends
+ **/
+public class PagePoster {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

@@ -1,0 +1,12 @@
+package com.vus;
+
+/**
+ * Create post to your page time line
+ **/
+public class PagePoster {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

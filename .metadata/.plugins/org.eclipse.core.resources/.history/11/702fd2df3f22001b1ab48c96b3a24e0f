@@ -1,0 +1,28 @@
+package com.vus;
+
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+
+public class EmailSender {
+
+	public static void main(String[] args) {
+		// Create an props object
+		Properties props = new Properties();
+		props.put(CommonConstant.SMTP_AUTH, CommonConstant.IS_AUTH_ENABLE);
+		props.put(CommonConstant.SMTP_HOST, CommonConstant.HOST_NAME);
+		props.put(CommonConstant.SMTP_SOCKET_FACTORY_PORT, CommonConstant.SSL_PORT);
+		props.put(CommonConstant.SMTP_SOCKET_FACTORY_CLASS, CommonConstant.SSL_CLASS);
+		props.put(CommonConstant.SMTP_PORT, CommonConstant.SSL_PORT);
+		
+		// Create session for object created
+		Session session = Session.getDefaultInstance(props, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(CommonConstant.APP_EMAIL, CommonConstant.APP_PASSWORD);
+			}
+		});
+	}
+
+}
