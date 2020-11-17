@@ -1,9 +1,0 @@
-package com.vus;
-
-public class PagePoster {
-
-	public static void main(String[] args) {
-		
-	}
-
-}

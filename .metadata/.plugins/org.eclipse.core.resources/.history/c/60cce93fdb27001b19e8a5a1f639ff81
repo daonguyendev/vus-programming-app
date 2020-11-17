@@ -1,0 +1,18 @@
+package com.vus;
+
+public class Test {
+
+	public static void main(String[] args) {
+//		System.out.print("Hello Kiet Trinh");
+		
+		int a = 5;
+		System.out.println("a="+5);
+		
+//		if () {
+//			
+//		} else {
+//			
+//		}
+	}
+
+}

@@ -1,9 +1,0 @@
-package com.vus;
-
-public class SendingEmailToYourFriends {
-
-	public static void main(String[] args) {
-		
-	}
-
-}
