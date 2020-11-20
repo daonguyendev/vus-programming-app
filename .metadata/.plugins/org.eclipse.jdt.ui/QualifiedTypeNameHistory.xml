@@ -10,7 +10,8 @@
     <fullyQualifiedTypeName name="javax.mail.Message"/>
     <fullyQualifiedTypeName name="javax.mail.Message.RecipientType"/>
     <fullyQualifiedTypeName name="javax.mail.Transport"/>
-    <fullyQualifiedTypeName name="javax.mail.Address"/>
     <fullyQualifiedTypeName name="com.vus.CommonConstant"/>
     <fullyQualifiedTypeName name="javax.mail.internet.InternetAddress"/>
+    <fullyQualifiedTypeName name="javax.mail.Address"/>
+    <fullyQualifiedTypeName name="javax.mail.internet.MimeBodyPart"/>
 </qualifiedTypeNameHistroy>

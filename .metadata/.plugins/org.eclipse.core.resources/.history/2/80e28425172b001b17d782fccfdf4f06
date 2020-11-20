@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMessage;
 public class EmailSender {
 
 	public static void main(String[] args) {
-		// Bước 4: Tạo đối tượng senderProps để thiết lập các thuộc tính của người gửi email
+		// Bước 1: Tạo đối tượng senderProps để thiết lập các thuộc tính của người gửi email
 		Properties senderProps = new Properties();
 		senderProps.put("mail.smtp.auth", true);
 		senderProps.put("mail.smtp.host", "smtp.gmail.com");
@@ -25,7 +25,7 @@ public class EmailSender {
 		senderProps.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		senderProps.put("mail.smtp.port", 465);
 		
-		// Bước 5: Tạo đối tượng senderSession (phiên làm việc của người gửi) 
+		// Bước 2: Tạo đối tượng senderSession (phiên làm việc của người gửi) 
 		// và nhận các thuộc tính của người gửi email từ đối tượng senderProps
 		Session senderSession = Session.getDefaultInstance(senderProps, new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -33,24 +33,26 @@ public class EmailSender {
 			}
 		});
 
-		// Bước 6: Soạn và gửi email
+		// Bước 3: Soạn và gửi email
 		try {
-			// Bước 6.1: Tạo danh sách đối tượng người nhận email (ở đây có 2 người nhận thôi)
-			String to = "daonguyen.dev@gmail.com , anh.le2708@hcmut.edu.vn, dao.nbm1502@gmail.com";
-			InternetAddress[] receivers = InternetAddress.parse(to, true);
+			// Bước 3.1: Tạo danh sách đối tượng người nhận email (ở đây có 1 người nhận thôi)
+			String to = "daonguyen.dev@gmail.com, anh.le2708@hcmut.edu.vn";
+			InternetAddress[] recipients = InternetAddress.parse("anh.le2708@hcmut.edu.vn", true);
 			
-			
-			// Bước 6.2: Soạn email
+			// Bước 3.2: Soạn email
 			MimeMessage myEmail = new MimeMessage(senderSession);
-			myEmail.setRecipients(Message.RecipientType.TO, receivers);
+			myEmail.setRecipients(Message.RecipientType.TO, recipients);
 			myEmail.setSubject("Hội thảo lập trình");
 			myEmail.setText("Chào mừng mọi người đến với buổi hội thảo lập trình hôm nay nhé!");
+			myEmail.setContent("<H1>Hello</H1><img src=\\\"https://fasttrack.edu.vn/wp-content/uploads/2020/09/logo-FT-01-e1600269903757.png\\\">", "text/html");
 			
-			// Bước 6.3: Gửi email và xuất thông báo gửi email thành công
+			// Bước 3.3: Gửi email
 			Transport.send(myEmail);
+			
+			// Bước 3.4: Thông báo cho người gửi biết đã gửi email thành công
 			System.out.println("Thư của bạn đã được gửi thành công!!!");
 		} catch (MessagingException ex) {
-			// Bước 6.4: Thông báo cho người gửi biết đã gửi email thất bại
+			// Bước 3.5: Thông báo cho người gửi biết đã gửi email thất bại
 			System.out.println("Thư của bạn đã được gửi thất bại!!!");
 			throw new RuntimeException(ex);
 		}

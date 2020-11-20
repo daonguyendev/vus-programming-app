@@ -46,11 +46,13 @@ public class EmailSender {
 			myEmail.setSubject("Hội thảo lập trình");
 			myEmail.setText("Chào mừng mọi người đến với buổi hội thảo lập trình hôm nay nhé!");
 			
-			// Bước 6.3: Gửi email và xuất thông báo gửi email thành công
+			// Bước 6.3: Gửi email
 			Transport.send(myEmail);
+			
+			// Bước 6.4: Thông báo cho người gửi biết đã gửi email thành công
 			System.out.println("Thư của bạn đã được gửi thành công!!!");
 		} catch (MessagingException ex) {
-			// Bước 6.4: Thông báo cho người gửi biết đã gửi email thất bại
+			// Bước 6.5: Thông báo cho người gửi biết đã gửi email thất bại
 			System.out.println("Thư của bạn đã được gửi thất bại!!!");
 			throw new RuntimeException(ex);
 		}

@@ -50,7 +50,7 @@ public class EmailSender {
 			Transport.send(myEmail);
 			System.out.println("Thư của bạn đã được gửi thành công!!!");
 		} catch (MessagingException ex) {
-			// Bước 6.4: Thông báo cho người gửi biết đã gửi email thất bại
+			// Bước 6.5: Thông báo cho người gửi biết đã gửi email thất bại
 			System.out.println("Thư của bạn đã được gửi thất bại!!!");
 			throw new RuntimeException(ex);
 		}
