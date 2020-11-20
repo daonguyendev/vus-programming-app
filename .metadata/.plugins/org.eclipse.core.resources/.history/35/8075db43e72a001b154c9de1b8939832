@@ -1,0 +1,30 @@
+package com.vus;
+
+public class CommonConstant {
+
+	// Email Sender Constants
+    public static final int SSL_PORT = 465;
+    public static final int TSL_PORT = 587;
+	public static final boolean IS_AUTH_ENABLE = true;
+    public static final String SMTP_AUTH = "mail.smtp.auth";
+    public static final String SMTP_HOST = "mail.smtp.host";
+    public static final String SMTP_SOCKET_FACTORY_PORT = "mail.smtp.socketFactory.port";
+    public static final String SMTP_SOCKET_FACTORY_CLASS = "mail.smtp.socketFactory.class";
+    public static final String SMTP_PORT = "mail.smtp.port";
+	public static final String HOST_NAME = "smtp.gmail.com";
+    public static final String SSL_CLASS = "javax.net.ssl.SSLSocketFactory";
+    public static final String SENDER_EMAIL = "vus.programming@gmail.com";
+    public static final String SENDER_PASSWORD = "Vus@PgMJS2020";
+    public static final String RECEIVER_EMAIL = "daonguyen.dev@gmail.com";
+    public static final String EMAIL_SUBJECT = "Hội thảo lập trình";
+    public static final String EMAIL_CONTENT = "Chào mừng mọi người đến với buổi hội thảo của ";
+    public static final String EMAIL_SENDING_CONFIRMATION = "Thư của bạn đã được gửi thành công!!!";
+    
+    // Page Poster Constants
+    public static final String ACCESS_TOKEN = "EAAFC0U3klsQBAMVg8QtuOUQxKhJQgI4FAq7YKycZAmBNvKwbT93hUR0KplKTWHbmu5cGV7UyrzPZBOZAr25VHqgwNEmVGM8FaheY3WR8HEFpBsZBYqfWRWHEd8NhikT8E5lkODbmd0DxlxDUtUkAb17AJskUrGXoiwwkFCsBYcXuQpQZAyH3xccRDhONkNvsZD";
+    public static final String PAGE_ID = "106332297955711";
+    public static final String ANSWER_YES = "Yes";
+    public static final String MESSAGE_PARAMETER = "message";
+    public static final String PAGE_NEW_FEED_URL = "/feed";
+    public static final String FACEBOOK_URL = "fb.com/";
+}

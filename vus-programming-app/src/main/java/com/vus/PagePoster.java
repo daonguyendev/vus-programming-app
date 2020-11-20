@@ -13,26 +13,39 @@ import com.restfb.types.Page;
  * Create post to your new feed page
  **/
 public class PagePoster {
+	
+	// Bước 1: Lấy thông tin chứng thực tài khoản của facebook page và page ID
+	private static final String ACCESS_TOKEN = "EAAFC0U3klsQBAPwNxVwVGmPgZAvZBvQy21qK2nlu9XH668sNJFcqZBBCikM9odK29ATHR44h83xwsdfhJJ2Jc4RVvUezNyJKGNZB5Rx1SV0r2CfNMoWZBljeoBR3im3Jr1cJ6ChDHt2Qs9PM6i1jasv7XnSerADm1z1EqKGiseQ4qZAIO3JqADWCZCYRSNMNnRzZCbai01e2jQZDZD";
+	private static final String PAGE_ID = "106332297955711";
 
 	public static void main(String[] args) {
-		FacebookClient fbClient = new DefaultFacebookClient(CommonConstant.ACCESS_TOKEN, Version.VERSION_3_1);
-		Page page = fbClient.fetchObject(CommonConstant.PAGE_ID, Page.class);
+		// Bước 2: Thiết lập thông tin chứng thực tài khoản của facebook page và page ID
+		// -> để chứng minh với facebook tôi là chủ của facebook page này
+		FacebookClient fbClient = new DefaultFacebookClient(ACCESS_TOKEN, Version.VERSION_3_1);
+		Page page = fbClient.fetchObject(PAGE_ID, Page.class);
 		
-		System.out.println("Tên của page là: " + page.getName());
-		System.out.println("Id của page là: " + page.getId());
+		// Bước 3: Kiểm tra việc chứng thực tài khoản thành công hay chưa
+		if (page.getId().equals(PAGE_ID)) {
+			System.out.println("Bạn chính xác là chủ của trang facebook " + page.getName());
+		}
 		
+		// Bước 4: Hỏi người dùng muốn đăng bài gì lên trang facebook này hay không
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("\nBạn có muốn đăng bài gì lên trang " + page.getName() + " không (Yes/No)?");
 		
+		// Bước 5: Đăng bài hoặc thoát chương trình
 		String answer = scanner.nextLine();
-		if (answer.equalsIgnoreCase(CommonConstant.ANSWER_YES)) {
+		
+		// Bước 5.1: Nếu người dùng trả lời là Yes (muốn đăng bài) 
+		// -> mời người ta nhập nội dung bài đăng và thực hiện đăng bài lên trang facebook này
+		if (answer.equalsIgnoreCase("Yes")) {
 			System.err.println("Mời bạn nhập nội dung muốn đăng lên trang này?");
 			String message = scanner.nextLine();
-			FacebookType response = fbClient.publish(page.getId() + CommonConstant.PAGE_NEW_FEED_URL, 
-														FacebookType.class, 
-														Parameter.with(CommonConstant.MESSAGE_PARAMETER, message));
-			System.out.println(CommonConstant.FACEBOOK_URL + response.getId());
+			FacebookType response = fbClient.publish(page.getId() + "/feed", FacebookType.class, Parameter.with("message", message));
+			System.out.println("fb.com/" + response.getId());
 		} else {
+			// Bước 5.2: Nếu người dùng trả lời là No (không muốn đăng bài) 
+			// -> cảm ơn người dùng đã dùng ứng dụng và thoát chương trình
 			System.err.println("Cảm ơn bạn đã dùng ứng dụng!");
 		}
 	}

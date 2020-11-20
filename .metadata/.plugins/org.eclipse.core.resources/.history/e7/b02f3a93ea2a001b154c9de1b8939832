@@ -1,0 +1,58 @@
+package com.vus;
+
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+/**
+ * Tính năng gửi email của gmail
+ **/
+public class EmailSender {
+
+	public static void main(String[] args) {
+		// Bước 1: Tạo đối tượng senderProps để thiết lập các thuộc tính của người gửi email
+		Properties senderProps = new Properties();
+		senderProps.put(CommonConstant.SMTP_AUTH, CommonConstant.IS_AUTH_ENABLE);
+		senderProps.put(CommonConstant.SMTP_HOST, CommonConstant.HOST_NAME);
+		senderProps.put(CommonConstant.SMTP_SOCKET_FACTORY_PORT, CommonConstant.SSL_PORT);
+		senderProps.put(CommonConstant.SMTP_SOCKET_FACTORY_CLASS, CommonConstant.SSL_CLASS);
+		senderProps.put(CommonConstant.SMTP_PORT, CommonConstant.SSL_PORT);
+		
+		// Create session for object created
+		// Bước 2: Tạo đối tượng session (phiên làm việc) nhận các thuộc tính của người gửi email từ đối tượng senderProps
+		Session senderSession = Session.getDefaultInstance(senderProps, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(CommonConstant.SENDER_EMAIL, CommonConstant.SENDER_PASSWORD);
+			}
+		});
+
+		// Bước 3: Soạn và gửi email
+		try {
+			// Bước 3.1: Tạo danh sách đối tượng người nhận email (ở đây có 1 người nhận thôi)
+			InternetAddress[] recipients = InternetAddress.parse(CommonConstant.RECEIVER_EMAIL, true);
+			
+			// Bước 3.2: Soạn email
+			MimeMessage myEmail = new MimeMessage(senderSession);
+			myEmail.setRecipients(Message.RecipientType.TO, recipients);
+			myEmail.setSubject(CommonConstant.EMAIL_SUBJECT);
+			myEmail.setText(CommonConstant.EMAIL_CONTENT);
+			
+			// Bước 3.3: Gửi email
+			Transport.send(myEmail);
+			
+			// Step 3.4: Thông báo cho người gửi biết đã gửi email thành công
+			System.out.println(CommonConstant.SENDING_SUCCESS);
+		} catch (MessagingException ex) {
+			System.out.println(CommonConstant.SENDING_FAILED);
+			throw new RuntimeException(ex);
+		}
+	}
+
+}

@@ -1,0 +1,44 @@
+package com.vus;
+
+import java.util.Scanner;
+
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.Parameter;
+import com.restfb.Version;
+import com.restfb.types.FacebookType;
+import com.restfb.types.Page;
+
+/**
+ * Create post to your new feed page
+ **/
+public class PagePoster {
+	
+	// Bước 1: Lấy thông tin chứng thực tài khoản của facebook page và page ID
+	private static final String ACCESS_TOKEN = "EAAFC0U3klsQBAPwNxVwVGmPgZAvZBvQy21qK2nlu9XH668sNJFcqZBBCikM9odK29ATHR44h83xwsdfhJJ2Jc4RVvUezNyJKGNZB5Rx1SV0r2CfNMoWZBljeoBR3im3Jr1cJ6ChDHt2Qs9PM6i1jasv7XnSerADm1z1EqKGiseQ4qZAIO3JqADWCZCYRSNMNnRzZCbai01e2jQZDZD";
+	private static final String PAGE_ID = "106332297955711";
+
+	public static void main(String[] args) {
+		// Bước 2: Thiết lập thông tin chứng thực tài khoản của facebook page và page ID
+		// -> để chứng minh với facebook tôi là chủ của facebook page này
+		FacebookClient fbClient = new DefaultFacebookClient(ACCESS_TOKEN, Version.VERSION_3_1);
+		Page page = fbClient.fetchObject(PAGE_ID, Page.class);
+		
+		System.out.println("Tên của page là: " + page.getName());
+		System.out.println("Id của page là: " + page.getId());
+		
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("\nBạn có muốn đăng bài gì lên trang " + page.getName() + " không (Yes/No)?");
+		
+		String answer = scanner.nextLine();
+		if (answer.equalsIgnoreCase("Yes")) {
+			System.err.println("Mời bạn nhập nội dung muốn đăng lên trang này?");
+			String message = scanner.nextLine();
+			FacebookType response = fbClient.publish(page.getId() + "/feed", FacebookType.class, Parameter.with("message", message));
+			System.out.println("fb.com/" + response.getId());
+		} else {
+			System.err.println("Cảm ơn bạn đã dùng ứng dụng!");
+		}
+	}
+
+}

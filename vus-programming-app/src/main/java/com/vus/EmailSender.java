@@ -12,45 +12,46 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- * Send email to your friends
+ * Tính năng gửi email của gmail
  **/
 public class EmailSender {
 
 	public static void main(String[] args) {
-		// Create an props object
-		Properties props = new Properties();
-		props.put(CommonConstant.SMTP_AUTH, CommonConstant.IS_AUTH_ENABLE);
-		props.put(CommonConstant.SMTP_HOST, CommonConstant.HOST_NAME);
-		props.put(CommonConstant.SMTP_SOCKET_FACTORY_PORT, CommonConstant.SSL_PORT);
-		props.put(CommonConstant.SMTP_SOCKET_FACTORY_CLASS, CommonConstant.SSL_CLASS);
-		props.put(CommonConstant.SMTP_PORT, CommonConstant.SSL_PORT);
+		// Bước 1: Tạo đối tượng senderProps để thiết lập các thuộc tính của người gửi email
+		Properties senderProps = new Properties();
+		senderProps.put("mail.smtp.auth", true);
+		senderProps.put("mail.smtp.host", "smtp.gmail.com");
+		senderProps.put("mail.smtp.socketFactory.port", 465);
+		senderProps.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		senderProps.put("mail.smtp.port", 465);
 		
-		// Create session for object created
-		Session session = Session.getDefaultInstance(props, new Authenticator() {
+		// Bước 2: Tạo đối tượng senderSession (phiên làm việc của người gửi) 
+		// và nhận các thuộc tính của người gửi email từ đối tượng senderProps
+		Session senderSession = Session.getDefaultInstance(senderProps, new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(CommonConstant.APP_EMAIL, CommonConstant.APP_PASSWORD);
+				return new PasswordAuthentication("vus.programming@gmail.com", "Vus@PgMJS2020");
 			}
 		});
-		
-		// Compose message to send email
+
+		// Bước 3: Soạn và gửi email
 		try {
-			// Create recipients
-			String recipients = CommonConstant.FIRST_RECEIVE_EMAIL 
-									+ "," + CommonConstant.SECOND_RECEIVE_EMAIL;
-			InternetAddress[] toRecipients = InternetAddress.parse(recipients, true);
+			// Bước 3.1: Tạo danh sách đối tượng người nhận email (ở đây có 1 người nhận thôi)
+			InternetAddress[] recipients = InternetAddress.parse("daonguyen.dev@gmail.com", true);
 			
-			// Compose email
-			MimeMessage message = new MimeMessage(session);
-			message.setRecipients(Message.RecipientType.TO, toRecipients);
-			message.setSubject(CommonConstant.EMAIL_SUBJECT);
-			message.setText(CommonConstant.EMAIL_CONTENT);
+			// Bước 3.2: Soạn email
+			MimeMessage myEmail = new MimeMessage(senderSession);
+			myEmail.setRecipients(Message.RecipientType.TO, recipients);
+			myEmail.setSubject("Hội thảo lập trình");
+			myEmail.setText("Chào mừng mọi người đến với buổi hội thảo lập trình hôm nay nhé!");
 			
-			// Sending email
-			Transport.send(message);
+			// Bước 3.3: Gửi email
+			Transport.send(myEmail);
 			
-			// Email sending confirmation
-			System.out.println(CommonConstant.EMAIL_SENDING_CONFIRMATION);
+			// Bước 3.4: Thông báo cho người gửi biết đã gửi email thành công
+			System.out.println("Thư của bạn đã được gửi thành công!!!");
 		} catch (MessagingException ex) {
+			// Bước 4: Thông báo cho người gửi biết đã gửi email thất bại
+			System.out.println("Thư của bạn đã được gửi thất bại!!!");
 			throw new RuntimeException(ex);
 		}
 	}
