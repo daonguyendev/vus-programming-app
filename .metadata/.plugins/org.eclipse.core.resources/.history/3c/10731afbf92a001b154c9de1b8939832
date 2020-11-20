@@ -10,7 +10,7 @@ import com.restfb.types.FacebookType;
 import com.restfb.types.Page;
 
 /**
- * Tính năng tạo bài đăng lên trang facebook page
+ * Create post to your new feed page
  **/
 public class PagePoster {
 	
