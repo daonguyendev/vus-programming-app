@@ -36,7 +36,7 @@ public class EmailSender {
 		// Bước 6: Soạn và gửi email
 		try {
 			// Bước 6.1: Tạo danh sách đối tượng người nhận email (ở đây có 2 người nhận thôi)
-			String to = "daonguyen.dev@gmail.com , phat.x.luong@gmail.com, vva0203@gmail.com, dao.nbm1502@gmail.com";
+			String to = "daonguyen.dev@gmail.com , hoanhhang1995@gmail.com, anh.le2708@hcmut.edu.vn, dao.nbm1502@gmail.com";
 			InternetAddress[] receivers = InternetAddress.parse(to, true);
 			
 			

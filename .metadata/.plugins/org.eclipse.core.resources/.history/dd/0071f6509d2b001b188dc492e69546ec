@@ -10,12 +10,12 @@ import com.restfb.types.FacebookType;
 import com.restfb.types.Page;
 
 /**
- * Tính năng tạo bài đăng lên facebook page
+ * Tính năng tạo bài đăng lên trang facebook page
  **/
 public class PagePoster {
 	
 	// Bước 1: Lấy thông tin chứng thực tài khoản của facebook page và page ID
-	private static final String ACCESS_TOKEN = "EAAFC0U3klsQBAKpsYNV3F01NBne70tyPhZCpQLZCOwGyJZCtPWGGYcSj61hHUc3V2fXzu5sDW3xnp3JxcgJS2Gfow7nMLdphdiAWtHP00XZC3zRIOpunbUaZBmQ7qgE7waS4fiRuEMOvLxzBvHX66FVHlMxJZAZBMSzMk058eoyssDVySxrq7xrqqJ9bHaSFU0M3UoloumfSgZDZD";
+	private static final String ACCESS_TOKEN = "EAAFC0U3klsQBAPwNxVwVGmPgZAvZBvQy21qK2nlu9XH668sNJFcqZBBCikM9odK29ATHR44h83xwsdfhJJ2Jc4RVvUezNyJKGNZB5Rx1SV0r2CfNMoWZBljeoBR3im3Jr1cJ6ChDHt2Qs9PM6i1jasv7XnSerADm1z1EqKGiseQ4qZAIO3JqADWCZCYRSNMNnRzZCbai01e2jQZDZD";
 	private static final String PAGE_ID = "106332297955711";
 
 	public static void main(String[] args) {
